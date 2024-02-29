@@ -1,0 +1,20 @@
+stages:
+  - deploy
+
+deploy_to_heroku_staging:
+  stage: deploy
+  script:
+    - gem install faraday -v 1.9.3
+    - gem install dpl
+    - dpl --provider=heroku --app=staging-shopify-nesspaper --api-key=$HEROKU_API_KEY
+  only:
+  - develop
+
+deploy_to_heroku_production:
+  stage: deploy
+  script:
+    - gem install faraday -v 1.9.3
+    - gem install dpl
+    - dpl --provider=heroku --app=shopify-nesspaper --api-key=$HEROKU_API_KEY
+  only:
+    - main
